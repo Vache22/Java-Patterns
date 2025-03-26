@@ -1,10 +1,74 @@
 package JavaPractise;
 
+import com.google.gson.stream.JsonToken;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class Operators {
+
     public static void main(String[] args) {
 
-        fibonacciSequence();
 
+    }
+
+    public static void advancedFilter(){
+        class Student {
+            int roll;
+            int marks;
+            String name;
+
+            Student(int r, String n, int m) {
+                roll = r;
+                name = n;
+                marks = m;
+            }
+            int getRoll() {
+                return roll;
+            }
+
+            String getName() {
+                return name;
+            }
+
+            int getMarks() {
+                return marks;
+            }
+        }
+        Student arr[] = {
+                new Student(110, "abc", 70),
+                new Student(101, "bcd", 80),
+                new Student(120, "xyz", 60)
+        };
+
+        Map<Integer,String > m = Arrays.stream(arr)
+                .collect(Collectors.toMap(Student::getRoll, Student::getName));
+
+        for (Map.Entry<Integer,String> ent : m.entrySet()){
+            System.out.println(ent.getKey() + " " + ent.getValue());
+        }
+    }
+
+    public static void listIterator(){
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+
+        ListIterator<Integer> it = list.listIterator();
+        list.stream().forEach(System.out::println);
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+    }
+
+    public static void filterLambda(){
+        List<Integer> al = Arrays.asList(10,20,30,40,15,7,5);
+        al.stream()
+                .filter(x -> x > 10)
+                .filter(x -> x % 2 == 0)
+                .forEach(x -> System.out.println(x + " "));
     }
 
     public static void squarePattern(){
